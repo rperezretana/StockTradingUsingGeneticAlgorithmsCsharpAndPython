@@ -7,3 +7,9 @@ The genetic algorithm was written in C# but the code to be run is in Python.
 To run it you will have to create a Quantopian account, and run it in there since their libraries are not available for external use ( it is free to use).
 The algorithm is no longer usefull since XIV stopped trading in 2018-02-12 but by then the algorithm got a profit of 353.24% for the current portfolio.
 If the algorithm was run from 12-10-2010 to 2018-02-12 it would have made 24719.02% in profits.
+
+TO run:
+- Create quantopian account.
+- Create new Algorithm.
+- Copy and paste the code.
+- Run backtest.
