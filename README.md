@@ -16,3 +16,6 @@ To run:
 - Create new Algorithm.
 - Copy and paste the code.
 - Run backtest.
+
+
+Note: This algorithm is no longer useful since XIV stoped trading in 2018-02-13
