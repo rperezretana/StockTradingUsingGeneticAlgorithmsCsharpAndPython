@@ -18,4 +18,4 @@ To run:
 - Run backtest.
 
 
-Note: This algorithm is no longer useful since XIV stoped trading in 2018-02-13
+Note: This algorithm is no longer useful since XIV stopped trading in 2018-02-13
