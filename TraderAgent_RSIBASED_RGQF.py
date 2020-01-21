@@ -102,6 +102,7 @@ def bar_open(context,data):
         context.sell = False
         context.buy = False 
  
+ #Setting up candles for rebalance. See document "Candles for rebalance" for details on this.
 def my_rebalance(context,data):
     xiv_prices = data.history(context.XIV, "price", 1600, "1m").resample('30T',  closed='right', label='right').last().dropna()
 
@@ -169,6 +170,8 @@ def my_rebalance(context,data):
     if context.rsi_last == -1:
         context.rsi_last = rsi[-2]
     
+    
+    #Using Agent conditions
     if context.buy is False and context.rsi_last < TraderAgent_RSIBASED_RGQF.RsiUpperLimit and rsi[-1] >= TraderAgent_RSIBASED_RGQF.RsiUpperLimit and context.portfolio.positions[context.XIV].amount == 0:
         context.buy = True
         
@@ -179,15 +182,16 @@ def my_rebalance(context,data):
         if context.buyVXX is False and rsi[-1] <= TraderAgent_RSIBASED_RGQF.RsiLowerLimit and context.portfolio.positions[context.VXX].amount == 0:
          context.buyVXX = True
 
-    # Buy VXX rule
+    # Buy rule
     if context.buyVXX is False and context.rsi_last > TraderAgent_RSIBASED_RGQF.RsiLowerLimit and rsi[-1] <= TraderAgent_RSIBASED_RGQF.RsiLowerLimit and context.portfolio.positions[context.XIV].amount == 0 and context.portfolio.positions[context.VXX].amount == 0:
         context.buyVXX = True
 
-    # Sell VXX rule
+    # Sell rule
     if context.rsi_last < TraderAgent_RSIBASED_RGQF.RsiLowerLimitTrend and rsi[-1] >= TraderAgent_RSIBASED_RGQF.RsiLowerLimitTrend and context.portfolio.positions[context.VXX].amount > 0:
      order_target_percent(context.VXX, 0)
      context.buyVXX = False
-        
+    
+    #End of agent usage
     # panic button hard for safety:
     high = (data.history(context.XIV, "high", 119, "1m")).max()
     if context.last_bar:
